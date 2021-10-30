@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather api</title>
+    <link rel="stylesheet" href="location.css">
+</head>
+
+<body>
+    <div class="form-input">
+        <form action="/" method="post">
+            <!-- <label for="">Enter city name</label> -->
+            <input type="text" placeholder="Enter city name" autofocus>
+            <div class="radio-div">
+                <input class="first-radio" type="radio" name="unit" required checked="checked">
+                <label for="">
+                    Kelvin
+                </label>
+                <input type="radio" name="unit" required>
+                <label for="">
+                    Fahrenheit
+                </label>
+                <input type="radio" name="unit" required>
+                <label for="">
+                    Celsius
+                </label>
+            </div>
+            <div class="button-div">
+                <button type="submit" class="input-button">submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
