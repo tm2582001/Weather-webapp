@@ -10,7 +10,7 @@ router.get("/",(req,res)=>{
     https.get(url,(response)=>{
         response.on('data', (d)=>{
             let data = JSON.parse(d);
-            console.log(data.results[0]);
+            
             let {city,state_district} = data.results[0].components;
             
             state_district = state_district.replace(" District", '');
