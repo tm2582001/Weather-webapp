@@ -1,1 +1,1 @@
-id with camel case are for JavaScript
+id and classes with camel-casing is just usen in javascript not in css

@@ -175,3 +175,6 @@ hr{
     width: 75px;
 }
 
+.one-hour,.two-hour{
+    border-right: 1px solid;
+}

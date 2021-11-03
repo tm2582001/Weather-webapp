@@ -17,7 +17,7 @@ router.get("/",(req,res)=>{
     }else if(unit === "Celsius"){
         apiUnits = "metric";
     }
-
+    
     let url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&units="+apiUnits+"&appid="+key;
 
     https.get(url,(response)=>{
@@ -48,7 +48,7 @@ router.get("/",(req,res)=>{
                         }
                         hourly.push(weather);
                     }
-                    
+
                     // colecting data in on variable
                     let finalData = {
                         weather: weather,
