@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
 .form-input{
     display: flex;
     height: 90vh;
@@ -20,6 +24,7 @@ input[type="text"]{
     border: 1px solid #ccc;
     font-size: 16px;
     margin-bottom: 15px;
+    font-family: 'Roboto', sans-serif;
 }  
 
 input[type="text"]:focus{
@@ -43,6 +48,7 @@ input[type="radio"]{
     width: 18px;
     height: 18px;
     margin-left: 30px;
+    margin-top: 3px;
 }
 
 .first-radio{
@@ -54,6 +60,6 @@ input[type="radio"]{
     justify-content: center;
 }
 
-/* .input-button{
-    
-} */
+.input-button{
+    font-family: 'Poppins', sans-serif;
+}

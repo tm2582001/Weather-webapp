@@ -22,28 +22,50 @@ router.get("/",(req,res)=>{
 
     https.get(url,(response)=>{
         response.on('data',(d)=>{
-            res.write(d);
+            // res.write(d);
 
             let data = JSON.parse(d)
 
             const {lat,lon} = data.coord;
 
 
-            let newUrl = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&units="+apiUnits+"&exclude=current,minutely,hourly,alerts&appid="+key;
-            
+            let newUrl = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&units="+apiUnits+"&exclude=current,minutely,daily,alerts&appid="+key;
+  
             https.get(newUrl,(newResponse)=>{
                 
                 newResponse.on('data',(newd)=>{
-                    console.log(data);
-                    res.write(newd);
-                    res.send();
-                });
 
+                    const newData = JSON.parse(newd);
+
+                    // geathering important data
+                    const {weather,main,wind,sys} = data;
+                    let hourly = [];
+
+                    for(let i=1;i<=3;i++){
+                        let weather={
+                            temp:newData.hourly[i].temp,
+                            icon:newData.hourly[i].weather[0].icon
+                        }
+                        hourly.push(weather);
+                    }
+                    
+                    // colecting data in on variable
+                    let finalData = {
+                        weather: weather,
+                        main: main,
+                        windSpeed: wind.speed,
+                        country: sys.country,
+                        hourly: hourly
+                    }
+                    
+                    finalData = JSON.stringify(finalData);
+                    res.send(finalData);
+                });
 
             });
 
         });
-        
+    
     });
 
     
