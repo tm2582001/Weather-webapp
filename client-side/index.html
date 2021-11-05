@@ -8,15 +8,31 @@
     <title>Weather api</title>
 
     <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
+    <section id="form-section">
     <div class="form-input">
-        <form action="weather.html" method="get">
-            <label for="">Enter city name</label>
-            <input id="text-area" name="city" type="text" placeholder="Enter city name" autofocus>
+        <form>
+            <label class="text-label" for="text-area">
+                <input id="text-area" name="city" type="text" placeholder="Enter city name" autofocus>
+                <span class="floating-label">Enter city name</span>
+                <svg id="city-load" xmlns="http://www.w3.org/2000/svg" version="1.1" width="20px" height="20px">
+                    <defs>
+                        <linearGradient id="cityGradientColor">
+                            <stop offset="0%" stop-color="#2193b0" />
+                            <stop offset="100%" stop-color="#6dd5ed" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="10" cy="10" r="6" stroke-linecap="round" />
+                </svg>
+            </label>
             <div class="radio-div">
                 <input class="first-radio" type="radio" name="unit" value="Kelvin" required checked="checked">
                 <label for="">
@@ -32,10 +48,21 @@
                 </label>
             </div>
             <div class="button-div">
-                <button type="submit" class="input-button">submit</button>
+                <button type="button" class="input-button">Submit
+                    <svg id="submit-load" xmlns="http://www.w3.org/2000/svg" version="1.1" width="20px" height="20px">
+                        <defs>
+                            <linearGradient id="submitGradientColor">
+                                <stop offset="0%" stop-color="#2193b0" />
+                                <stop offset="100%" stop-color="#6dd5ed" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="10" cy="10" r="6" stroke-linecap="round" />
+                    </svg>
+                </button>
             </div>
         </form>
     </div>
+</section>
     <script src="javascript/index.js"></script>
 </body>
 

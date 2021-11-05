@@ -1,22 +1,33 @@
 let id = (id) => document.getElementById(id);
+let classes = (classes) => document.getElementsByClassName(classes); 
 
 function GetCoordinate() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(GetLocation);
+      
     }
 }
 
 const GetLocation = (location) =>{
+  id("city-load").style.display = "initial";
   const {latitude,longitude} = location.coords;
 
   fetch("http://localhost:8080/location?coords="+latitude+"+"+longitude)
+  .catch( (err) => {id("city-load").style.display = "none";})
   .then((res)=>res.text())
-  .then(data);
+  .then(cityName);
 }
 
-const data = (data) =>{
-  id("text-area").setAttribute("value",data);
+const cityName = (cityName) =>{
+  id("text-area").setAttribute("value",cityName);
+  id("city-load").style.display = "none";
 }
 
-GetCoordinate();
+window.addEventListener('load',()=>{
+  GetCoordinate();
+});
+
+classes("input-button")[0].addEventListener('click', ()=>{
+  id("submit-load").style.display = "initial";
+});
 

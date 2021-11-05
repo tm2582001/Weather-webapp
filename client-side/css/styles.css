@@ -2,21 +2,27 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
-body{
-    font-family: 'Poppins', sans-serif;
-}
+
+/* form section */
 
 .form-input{
     display: flex;
     height: 90vh;
     align-items: center;
     justify-content: center;
+    letter-spacing: -.025em;
+}
+
+/* floating label */
+
+.text-label{
+    position: relative;
 }
 
 input[type="text"]{
-    display: block;
     width: 400px;
     height: 40px;
     border-radius: 50px;
@@ -27,11 +33,32 @@ input[type="text"]{
     font-family: 'Roboto', sans-serif;
 }  
 
+input[type="text"]::placeholder{
+    opacity: 0;
+}
+
 input[type="text"]:focus{
     outline: none !important;
-    border: 1px solid #1975DB;
-    /* background-color: #A4D6FF; */
+    border: 2px solid #1975DB;
+    box-shadow: 0 0 10px #719ECE;
 }
+
+.floating-label{
+    position: absolute;
+    top: 0;
+    left: 15px;
+    transition: all 0.500ms linear;
+}
+
+input[type="text"]:focus + .floating-label,
+input[type="text"]:not(:placeholder-shown) + .floating-label
+{   
+    left: 20px;
+    top: -21px;
+    background: white;
+}
+
+/* radio input */
 
 .radio-div{
     display: flex;
@@ -48,13 +75,13 @@ input[type="radio"]{
     width: 18px;
     height: 18px;
     margin-left: 30px;
-    margin-top: 3px;
 }
 
 .first-radio{
     margin-left: 0 !important; 
 }
 
+/* submit button */
 .button-div{
     display: flex;
     justify-content: center;
@@ -62,4 +89,61 @@ input[type="radio"]{
 
 .input-button{
     font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    padding: 1px 5px;
 }
+
+/* loading animation */
+
+svg{
+    animation: rotate 3s linear infinite;
+}
+
+circle{
+    fill: none;   
+    stroke-width: 3px;
+    stroke-dasharray: 38;
+    stroke-dashoffset: 65;
+    animation: dash 2s linear infinite;
+}
+
+#city-load{
+    display: none;
+    position: absolute;
+    right: 13px;
+    bottom: 0;
+}
+
+#city-load circle{
+    stroke: url(#cityGradientColor);
+}
+
+#submit-load circle{
+    stroke: url(#submitGradientColor);
+}
+
+#submit-load{
+    display: none;
+}
+
+@keyframes rotate {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash {
+    0%{
+        stroke-dashoffset: 65;
+    }
+    50%{
+        stroke-dashoffset: 39;
+    }
+    100%{
+        stroke-dashoffset: 0;
+    }
+}
+

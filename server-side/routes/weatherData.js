@@ -19,7 +19,7 @@ router.get("/",(req,res)=>{
     }
     
     let url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&units="+apiUnits+"&appid="+key;
-
+    console.log(url);
     https.get(url,(response)=>{
         response.on('data',(d)=>{
             // res.write(d);
