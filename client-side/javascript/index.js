@@ -29,5 +29,8 @@ window.addEventListener('load',()=>{
 
 classes("input-button")[0].addEventListener('click', ()=>{
   id("submit-load").style.display = "initial";
-});
 
+  // test code
+  id("form-section").style.display = "none";
+  id("Weather-data-section").style.display = "block"
+});

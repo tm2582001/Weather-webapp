@@ -22,8 +22,8 @@ body{
 /* form section */
 
 #form-section{
-    background: var(--secondary-bg);
     display: none;
+    background: var(--secondary-bg);
 }
 
 .form-input{
@@ -186,6 +186,7 @@ circle{
 /* weather data section */
 
 #Weather-data-section{
+    /* display: none; */
     background: var(--secondary-bg);
     width: 100%;
     padding: 3rem;
@@ -208,6 +209,7 @@ circle{
     border-radius: 28px;
     margin-left: 25px;
     border: 1px solid hsla(0,0%,51.4%,.16);
+    animation: margin 1s linear;
 }
 .city-details{
     font-size: 22px;
@@ -287,8 +289,26 @@ circle{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 10px;
+    margin: 10px 10px 10px 10px;
+    animation: margin 1s linear;
 }
+
+@keyframes margin {
+    from{
+        margin-top: 100px;
+        opacity: 0;
+    }
+
+    to{
+        margin-top: 0px;
+        opacity: 1;
+    }
+}
+
+/* .animation{
+    opacity: 1;
+    margin-top: 10px;
+} */
 
 .value{
     display: inline-block;
@@ -373,6 +393,30 @@ circle{
 }
 
 /* responsive */
+
+/* form section */
+
+@media (max-width: 540px){
+    .form-div{
+        width: 350px;
+    }
+    input[type="text"]{
+        width: 320px;
+        height: 50px;
+        margin-bottom: 20px;
+    }
+
+    .radio-div{
+        margin-bottom: 20px;
+    }
+
+    .input-button{
+        height: 60px;
+        width: 80px;
+    } 
+}
+
+/* weather data section */
 
 @media (max-width: 1340px) and (min-width: 991px){
     
@@ -603,30 +647,6 @@ circle{
     }
 
     .other-data{
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 540px){
-    .form-div{
-        width: 350px;
-    }
-    input[type="text"]{
-        width: 320px;
-        height: 50px;
-        margin-bottom: 20px;
-    }
-
-    .radio-div{
-        margin-bottom: 20px;
-    }
-
-    .input-button{
-        height: 60px;
-        width: 80px;
-    }
-
-    .weather-data{
         grid-template-columns: 1fr;
     }
 }
