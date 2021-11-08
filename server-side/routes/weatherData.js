@@ -1,74 +1,53 @@
-const { response } = require("express");
 const express = require("express");
 const router = express.Router();
 const https = require("https");
 
 
-router.get("/",(req,res)=>{
+router.get("/", (req, res) => {
     let city = req.query.city;
     let unit = req.query.unit;
     let key = process.env.WEATHERAPI;
     let apiUnits;
 
-    if(unit === "Kelvin"){
+    if (unit === "Kelvin") {
         apiUnits = "standard";
-    }else if(unit === "Fahrenheit"){
+    } else if (unit === "Fahrenheit") {
         apiUnits = "imperial";
-    }else if(unit === "Celsius"){
+    } else if (unit === "Celsius") {
         apiUnits = "metric";
     }
-    
-    let url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&units="+apiUnits+"&appid="+key;
-    console.log(url);
-    https.get(url,(response)=>{
-        response.on('data',(d)=>{
-            // res.write(d);
 
-            let data = JSON.parse(d)
+    let url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=" + apiUnits + "&appid=" + key;
 
-            const {lat,lon} = data.coord;
+    https.get(url, (response) => {
+        response.on('data', (d) => {
 
+            let data = JSON.parse(d);
 
-            let newUrl = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&units="+apiUnits+"&exclude=current,minutely,daily,alerts&appid="+key;
-  
-            https.get(newUrl,(newResponse)=>{
-                
-                newResponse.on('data',(newd)=>{
+            // geathering important data
+            const { weather, main, wind, visibility, sys } = data;
 
-                    const newData = JSON.parse(newd);
+            // colecting data in on variable
+            let finalData = {
+                weather: weather,
+                main: main,
+                visibility: visibility,
+                windSpeed: wind.speed,
+                country: sys.country,
+            }
 
-                    // geathering important data
-                    const {weather,main,wind,sys} = data;
-                    let hourly = [];
+            // both method are same
 
-                    for(let i=1;i<=3;i++){
-                        let weather={
-                            temp:newData.hourly[i].temp,
-                            icon:newData.hourly[i].weather[0].icon
-                        }
-                        hourly.push(weather);
-                    }
+            // method 1
+            // res.json(finalData);
 
-                    // colecting data in on variable
-                    let finalData = {
-                        weather: weather,
-                        main: main,
-                        windSpeed: wind.speed,
-                        country: sys.country,
-                        hourly: hourly
-                    }
-                    
-                    finalData = JSON.stringify(finalData);
-                    res.send(finalData);
-                });
-
-            });
+            // method 2
+            finalData = JSON.stringify(finalData);
+            res.send(finalData);
 
         });
-    
-    });
 
-    
+    });
 
 });
 
