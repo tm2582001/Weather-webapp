@@ -20,33 +20,30 @@ router.get("/", (req, res) => {
     let url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=" + apiUnits + "&appid=" + key;
 
     https.get(url, (response) => {
-        response.on('data', (d) => {
 
-            let data = JSON.parse(d);
+        if (response.statusCode == 200) {
+            response.on('data', (d) => {
+                let data = JSON.parse(d);
 
-            // geathering important data
-            const { weather, main, wind, visibility, sys } = data;
+                // geathering important data
+                const { weather, main, wind, visibility, sys } = data;
 
-            // colecting data in on variable
-            let finalData = {
-                weather: weather,
-                main: main,
-                visibility: visibility,
-                windSpeed: wind.speed,
-                country: sys.country,
-            }
+                // colecting data in on variable
+                let finalData = {
+                    weather: weather,
+                    main: main,
+                    visibility: visibility,
+                    windSpeed: wind.speed,
+                    country: sys.country,
+                }
 
-            // both method are same
+                finalData = JSON.stringify(finalData);
+                res.send(finalData);
 
-            // method 1
-            // res.json(finalData);
-
-            // method 2
-            finalData = JSON.stringify(finalData);
-            res.send(finalData);
-
-        });
-
+            });
+        } else {
+            res.status(400).json({ error: "Something went wrong!!!" });
+        }
     });
 
 });

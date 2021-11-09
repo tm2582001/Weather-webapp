@@ -17,8 +17,12 @@ const GetLocation = (location) =>{
 
   fetch("http://localhost:8080/location?coords="+latitude+"+"+longitude)
   .catch( (err) => {id("city-load").style.display = "none";})
-  .then((res)=>res.text())
-  .then(cityName);
+  .then((res)=>res.json())
+  .then((data)=> {
+    if(!data.error){
+      cityName(data.city);
+    }
+  });
 }
 
 const cityName = (cityName) =>{
@@ -113,7 +117,15 @@ let getWeather = (enteredcity,unit) =>{
                       classes("error")[0].style.display = "block";
   })
   .then((res)=>res.json())
-  .then((data)=> updateData(enteredcity,unit,data));
+  .then((data)=> {if(!data.error){
+      updateData(enteredcity,unit,data)
+    }else{
+      id("submit-load").style.display = "none";
+      classes("error")[0].innerHTML = "An error occured!!!";
+      classes("error")[0].style.display = "block";
+    }
+
+  });
 }
 
 
